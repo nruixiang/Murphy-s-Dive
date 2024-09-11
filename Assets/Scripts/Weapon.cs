@@ -18,6 +18,9 @@ public class Weapon : MonoBehaviour
     {
         
     }
+    public void Fire(){
+        
+    }
     public void SetWeaponStats(){
         WeaponStats weaponStats = csvReader.GetWeaponById(Weapon_ID);
         damage = weaponStats.damage;

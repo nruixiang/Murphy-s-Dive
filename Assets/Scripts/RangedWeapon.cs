@@ -13,7 +13,7 @@ public class RangedWeapon : Weapon
     // Start is called before the first frame update
     void Awake(){
         Weapon_ID = 1002;
-        SetWeaponStats();
+        //SetWeaponStats();
 
     }
     void Start()
@@ -34,11 +34,13 @@ public class RangedWeapon : Weapon
 
         transform.rotation = Quaternion.Euler(0,0,rotZ);
 
-        if(canFire == true){
+        if(Input.GetKeyDown(KeyCode.Mouse0)){
+            if(canFire == true){
             Instantiate(projectile, projectileTransform.position, Quaternion.identity);
-            canFire = false;
 
+            }
         }
+        
         
         
     }

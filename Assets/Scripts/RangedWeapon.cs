@@ -13,7 +13,7 @@ public class RangedWeapon : Weapon
     
     // Start is called before the first frame update
     void Awake(){
-        Weapon_ID = 1002;
+        Weapon_ID = 1001;
         //SetWeaponStats();
 
     }
@@ -40,15 +40,15 @@ public class RangedWeapon : Weapon
             Instantiate(projectile, projectileTransform.position, Quaternion.identity);
             canFire = false;
             } 
-            if(canFire == false){
+                
+        }
+        if(canFire == false){
                 timer -= Time.deltaTime;
                 if(timer <= 0){
                     canFire = true;
                     timer = 1;
                 }
             }
-                
-        }
         
         
         

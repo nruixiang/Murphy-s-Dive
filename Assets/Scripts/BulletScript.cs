@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     private Vector3 mousePos;
+    private Vector2 dir;
     private Camera mainCam;
     private Rigidbody2D rb;
     public float force;
@@ -20,6 +21,7 @@ public class BulletScript : MonoBehaviour
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
         float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot + 90);
+        dir = new Vector2(direction.x, direction.y).normalized;
         
     }
 
@@ -33,6 +35,13 @@ public class BulletScript : MonoBehaviour
             Enemy enemy = col.gameObject.GetComponent<Enemy>();
             enemy.health -= damage;
             Destroy(gameObject);
+        } else{
+            var firstContact = col.contacts[0];
+            Vector2 newVelocity = Vector2.Reflect(dir.normalized, firstContact.normal);
+            rb.velocity = newVelocity * force;
+            dir = newVelocity;
+            Debug.Log("Collided");
         }
+        
     }
 }

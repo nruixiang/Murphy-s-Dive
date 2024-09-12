@@ -8,7 +8,7 @@ public class BulletScript : MonoBehaviour
     private Camera mainCam;
     private Rigidbody2D rb;
     public float force;
-    private int damage;
+    [SerializeField] int damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +32,7 @@ public class BulletScript : MonoBehaviour
         if(col.gameObject.tag == "Enemy"){
             Enemy enemy = col.gameObject.GetComponent<Enemy>();
             enemy.health -= damage;
+            Destroy(gameObject);
         }
     }
 }

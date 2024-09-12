@@ -9,6 +9,7 @@ public class RangedWeapon : Weapon
     [SerializeField] GameObject projectile;
     public Transform projectileTransform;
     public bool canFire;
+    private float timer = 1;
     
     // Start is called before the first frame update
     void Awake(){
@@ -37,8 +38,16 @@ public class RangedWeapon : Weapon
         if(Input.GetKeyDown(KeyCode.Mouse0)){
             if(canFire == true){
             Instantiate(projectile, projectileTransform.position, Quaternion.identity);
-
+            canFire = false;
+            } 
+            if(canFire == false){
+                timer -= Time.deltaTime;
+                if(timer <= 0){
+                    canFire = true;
+                    timer = 1;
+                }
             }
+                
         }
         
         

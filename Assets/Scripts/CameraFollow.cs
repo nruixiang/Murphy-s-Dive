@@ -8,6 +8,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] float yOffSet = 1f;
     public Transform target;
     public bool wallNear = false;
+    public float xMin, xMax, yMin, yMax;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,5 +35,8 @@ public class CameraFollow : MonoBehaviour
             wallNear = false;
             Debug.Log("Not Bump");
         }
+    }
+    private void UpdateCameraBounds(Bounds wallBounds){
+        
     }
 }

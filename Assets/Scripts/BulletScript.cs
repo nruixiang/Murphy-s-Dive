@@ -35,7 +35,7 @@ public class BulletScript : MonoBehaviour
             Enemy enemy = col.gameObject.GetComponent<Enemy>();
             enemy.health -= damage;
             Destroy(gameObject);
-        } else{
+        } else if(col.gameObject.tag == "Wall"){
             var firstContact = col.contacts[0];
             Vector2 newVelocity = Vector2.Reflect(dir.normalized, firstContact.normal);
             rb.velocity = newVelocity * force;

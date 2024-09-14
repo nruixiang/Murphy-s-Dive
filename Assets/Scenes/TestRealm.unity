@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 480070624}
   - component: {fileID: 480070626}
   - component: {fileID: 480070628}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ GameObject:
   m_Component:
   - component: {fileID: 632712536}
   - component: {fileID: 632712535}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -484,7 +484,7 @@ GameObject:
   - component: {fileID: 674432612}
   - component: {fileID: 674432614}
   - component: {fileID: 674432613}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1763,7 +1763,7 @@ GameObject:
   - component: {fileID: 1190176919}
   - component: {fileID: 1190176921}
   - component: {fileID: 1190176920}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}

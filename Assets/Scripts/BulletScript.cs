@@ -41,6 +41,10 @@ public class BulletScript : MonoBehaviour
             rb.velocity = newVelocity * force;
             dir = newVelocity;
             Debug.Log("Collided");
+        } else if(col.gameObject.tag == "Player"){
+            Player player = col.gameObject.GetComponent<Player>();
+            player.PlayerTakeDamage();
+            Destroy(gameObject);
         }
         
     }

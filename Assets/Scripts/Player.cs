@@ -20,4 +20,10 @@ public class Player : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
         rb.velocity = new Vector2(horizontal * movementSpeed, vertical * movementSpeed);
     }
+    public void PlayerTakeDamage(){
+        HealthManager.health--;
+        if(HealthManager.health == 0){
+            //Die
+        }
+    }
 }

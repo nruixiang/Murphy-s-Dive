@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 using UnityEngine;
@@ -8,7 +7,7 @@ using UnityEngine;
 public class HealthManager : MonoBehaviour
 {
     public static int health = 3;
-    public UnityEngine.UI.Image [] hearts;
+    public Image [] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
     // Start is called before the first frame update
@@ -20,7 +19,7 @@ public class HealthManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach(UnityEngine.UI.Image img in hearts){
+        foreach(Image img in hearts){
             img.sprite = emptyHeart;
 
         }

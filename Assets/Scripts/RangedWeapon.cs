@@ -36,10 +36,7 @@ public class RangedWeapon : Weapon
         transform.rotation = Quaternion.Euler(0,0,rotZ);
 
         if(Input.GetKeyDown(KeyCode.Mouse0)){
-            if(canFire == true){
-            Instantiate(projectile, projectileTransform.position, Quaternion.identity);
-            canFire = false;
-            } 
+            Shoot();
                 
         }
         if(canFire == false){
@@ -51,6 +48,15 @@ public class RangedWeapon : Weapon
             }
         
         
+        
+    }
+    void Shoot(){
+        if(canFire == true){
+            Instantiate(projectile, projectileTransform.position, Quaternion.identity);
+            canFire = false;
+            } 
+    }
+    void UltShoot(){
         
     }
 }

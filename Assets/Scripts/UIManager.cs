@@ -5,12 +5,13 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] Transform bar;
-    float ultCharge = 90;
-    float ultReq = 100;
+    public static float ultCharge = 0;
+    float ultReq = 10;
+    public static bool ultReady;
     // Start is called before the first frame update
     void Start()
     {
-        
+        ultReady = false;
     }
 
     // Update is called once per frame
@@ -21,6 +22,9 @@ public class UIManager : MonoBehaviour
         }
         SetUltBarState(ultCharge, ultReq);
         
+        if(ultCharge >= 10){
+            ultReady = true;
+        }
     }
     public void SetUltBarState(float charge, float maxCharge){
         float state = (float)charge;
@@ -28,6 +32,6 @@ public class UIManager : MonoBehaviour
         if(state < 0){
             state = 0f;
         }
-        bar.transform.localScale = new Vector3(state, 1f, 1f);
+        bar.transform.localScale = new Vector3(state, bar.localScale.y, 1f);
     }
 }

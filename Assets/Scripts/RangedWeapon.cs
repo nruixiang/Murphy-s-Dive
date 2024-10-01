@@ -7,6 +7,7 @@ public class RangedWeapon : Weapon
     private Camera mainCam;
     private Vector3 mousePos;
     [SerializeField] GameObject projectile;
+    [SerializeField] GameObject ultProjectile;
     public Transform projectileTransform;
     public bool canFire;
     private float timer = 1;
@@ -39,6 +40,9 @@ public class RangedWeapon : Weapon
             Shoot();
                 
         }
+        if(Input.GetKeyDown(KeyCode.Q)){
+            UltShoot();
+        }
         if(canFire == false){
                 timer -= Time.deltaTime;
                 if(timer <= 0){
@@ -46,7 +50,6 @@ public class RangedWeapon : Weapon
                     timer = 1;
                 }
             }
-        
         
         
     }
@@ -57,6 +60,10 @@ public class RangedWeapon : Weapon
             } 
     }
     void UltShoot(){
-        
+        if(UIManager.ultReady == true){
+            Instantiate(ultProjectile, projectileTransform.position, Quaternion.identity);
+            UIManager.ultReady = false;
+            UIManager.ultCharge = 0;
+        }
     }
 }

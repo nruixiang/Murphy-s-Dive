@@ -5,12 +5,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
     public float maxHealth;
     [SerializeField] float movementSpeed;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -19,6 +21,12 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         rb.velocity = new Vector2(horizontal * movementSpeed, vertical * movementSpeed);
+
+        if(horizontal >= 1){
+            sr.flipX = true;
+        } else if(horizontal < 0){
+            sr.flipX = false;
+        } 
     }
     public void PlayerTakeDamage(){
         HealthManager.health--;

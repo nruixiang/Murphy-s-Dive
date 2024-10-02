@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class RangedWeapon : Weapon
@@ -11,6 +12,7 @@ public class RangedWeapon : Weapon
     public Transform projectileTransform;
     public bool canFire;
     private float timer = 1;
+    
     
     // Start is called before the first frame update
     void Awake(){
@@ -49,7 +51,7 @@ public class RangedWeapon : Weapon
                     canFire = true;
                     timer = 1;
                 }
-            }
+        }
         
         
     }
@@ -61,7 +63,7 @@ public class RangedWeapon : Weapon
     }
     void UltShoot(){
         if(UIManager.ultReady == true){
-            Instantiate(ultProjectile, projectileTransform.position, Quaternion.identity);
+            Instantiate(ultProjectile, projectileTransform.position, projectileTransform.rotation);
             UIManager.ultReady = false;
             UIManager.ultCharge = 0;
         }

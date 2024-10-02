@@ -6,7 +6,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] Transform bar;
     public static float ultCharge = 0;
-    float ultReq = 10;
+    float ultReq = 2;
     public static bool ultReady;
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
         }
         SetUltBarState(ultCharge, ultReq);
         
-        if(ultCharge >= 10){
+        if(ultCharge >= ultReq){
             ultReady = true;
         }
     }

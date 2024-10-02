@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UltBulletScript : MonoBehaviour
+public class PoofBullet : MonoBehaviour
 {
-    [SerializeField] int damage;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +16,10 @@ public class UltBulletScript : MonoBehaviour
         
     }
     public void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.tag == "Enemy"){
-            Enemy enemy = col.gameObject.GetComponent<Enemy>();
-            enemy.health -= damage;
-            Debug.Log("IT HIIIIIT");
+        if(col.gameObject.tag == "Player"){
+            Player player = col.gameObject.GetComponent<Player>();
+            player.PlayerTakeDamage();
+            Destroy(gameObject);
         }
     }
     public IEnumerator BulletFade(){

@@ -8,6 +8,7 @@ public class Slime : Enemy
     void Awake(){
         state = State.Chase;
         canEnemyAttack = true;
+        dist = Vector2.Distance(transform.position, player.transform.position); //Initialize dist at start to prevent from going into Attack State at the start
     }
     void Start()
     {
@@ -27,6 +28,6 @@ public class Slime : Enemy
             AttackPlayer();
             break;
         }
-        dist = Vector2.Distance(transform.position, player.transform.position);
+        dist = Vector2.Distance(transform.position, player.transform.position); //Continuosly update it to transition back and forth between States
     }
 }

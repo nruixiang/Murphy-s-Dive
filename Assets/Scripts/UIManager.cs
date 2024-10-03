@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class UIManager : MonoBehaviour
         
         if(ultCharge >= ultReq){
             ultReady = true;
+        }
+
+        if(Input.GetKeyDown(KeyCode.R)){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
     public void SetUltBarState(float charge, float maxCharge){

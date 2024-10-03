@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] Transform bar;
     public static float ultCharge = 0;
-    float ultReq = 2;
+    float ultReq = 5;
     public static bool ultReady;
     // Start is called before the first frame update
     void Start()

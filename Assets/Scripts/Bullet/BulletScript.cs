@@ -10,6 +10,7 @@ public class BulletScript : MonoBehaviour
     private Rigidbody2D rb;
     public float force;
     [SerializeField] int damage;
+    [SerializeField] int bounceAmount = 4;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,10 @@ public class BulletScript : MonoBehaviour
             enemy.health -= damage;
             Destroy(gameObject);
         } else if(col.gameObject.tag == "Wall"){
+            --bounceAmount;
+            if(bounceAmount == 0){
+                Destroy(gameObject);
+            }
             var firstContact = col.contacts[0];
             Vector2 newVelocity = Vector2.Reflect(dir.normalized, firstContact.normal);
             rb.velocity = newVelocity * force;

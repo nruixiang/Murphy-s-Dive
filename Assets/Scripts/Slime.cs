@@ -12,8 +12,12 @@ public class Slime : Enemy
     }
     void Start()
     {
+        //Variables to initialize using a database (JSON/CSV)
         attackRange = 2f;
         enemyAttackCooldown = 2f;
+        health = 10;
+        speed = 1;
+
     }
 
     // Update is called once per frame
@@ -24,7 +28,6 @@ public class Slime : Enemy
             ChasePlayer();
             break;
             case State.Attack:
-            Debug.Log("In Attack State");
             AttackPlayer();
             break;
         }

@@ -9,8 +9,8 @@ public class Enemy : MonoBehaviour
         Chase, Attack,
     }
     public State state;
-    public int health = 10;
-    public int speed = 1;
+    public int health;
+    public int speed;
     public GameObject player;
     [SerializeField] Transform enemyAttackTransform;
     [SerializeField] GameObject enemyAttackHitbox;
@@ -33,12 +33,12 @@ public class Enemy : MonoBehaviour
     protected void AttackPlayer(){
         if(canEnemyAttack == true){
             StartCoroutine(AttackCooldown());
+            //Debug Code to remove
             Debug.Log("Attacking Player");
             TrackPlayer();
             Instantiate(enemyAttackHitbox, enemyAttackTransform.position, enemyAttackTransform.rotation);
             
         }
-        Debug.Log(canEnemyAttack);
         if(dist > attackRange){
             state = State.Chase;
         }

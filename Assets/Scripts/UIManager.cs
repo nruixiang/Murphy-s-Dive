@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.R)){
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            HealthManager.health = 3;
         }
     }
     public void SetUltBarState(float charge, float maxCharge){

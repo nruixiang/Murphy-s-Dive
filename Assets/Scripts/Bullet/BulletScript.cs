@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
@@ -38,7 +39,9 @@ public class BulletScript : MonoBehaviour
             Destroy(gameObject);
         } else if(col.gameObject.tag == "Wall"){
             --bounceAmount;
-            if(bounceAmount == 0){
+            if(bounceAmount == 1){
+                this.GetComponent<SpriteRenderer>().color = Color.red;
+            } else if(bounceAmount == 0){
                 Destroy(gameObject);
             }
             var firstContact = col.contacts[0];

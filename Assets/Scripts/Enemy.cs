@@ -57,4 +57,11 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(enemyAttackCooldown);
         canEnemyAttack = true;
     }
+    protected void FlipEnemy(){
+        if(player.transform.position.x > this.transform.position.x){
+            this.GetComponent<SpriteRenderer>().flipX = true;
+        } else{
+            this.GetComponent<SpriteRenderer>().flipX = false;
+        }
+    }
 }

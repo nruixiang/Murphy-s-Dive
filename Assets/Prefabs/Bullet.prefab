@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1987717468127830930}
   - component: {fileID: 1767620688388872065}
   - component: {fileID: 3891326257052507501}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,3 +163,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 8
   damage: 2
+  bounceAmount: 5

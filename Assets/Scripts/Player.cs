@@ -30,8 +30,14 @@ public class Player : MonoBehaviour
     }
     public void PlayerTakeDamage(){
         HealthManager.health--;
+        StartCoroutine(DamageFeedback());
         if(HealthManager.health == 0){
             //Die
         }
+    }
+    public IEnumerator DamageFeedback(){
+        this.GetComponent<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(1f);
+        this.GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

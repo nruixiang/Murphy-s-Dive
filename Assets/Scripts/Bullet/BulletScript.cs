@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class BulletScript : BulletBase
 {
     private Vector3 mousePos;
     private Vector2 dir;

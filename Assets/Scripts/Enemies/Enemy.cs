@@ -64,4 +64,12 @@ public class Enemy : MonoBehaviour
             this.GetComponent<SpriteRenderer>().flipX = false;
         }
     }
+    public void CheckEnemyHealth(){
+        if(health <= 0){
+            Destroy(gameObject);
+            GameRoomManager gameRoomManager = FindObjectOfType<GameRoomManager>();
+            gameRoomManager.EnemyDefeated();
+        }
+        
+    }
 }

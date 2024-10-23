@@ -33,5 +33,7 @@ public class Slime : Enemy
         }
         dist = Vector2.Distance(transform.position, player.transform.position); //Continuosly update it to transition back and forth between States
         FlipEnemy();
+
+        
     }
 }

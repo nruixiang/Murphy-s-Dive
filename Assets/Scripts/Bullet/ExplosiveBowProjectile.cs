@@ -17,6 +17,7 @@ public class ExplosiveBowProjectile : MonoBehaviour
     private bool decelerating = false;   // True while decelerating
     private bool returning = false;     // True when returning to player
     [SerializeField] Transform target;
+    [SerializeField] int damage;
     Vector3 targetPos;
 
     void Start()
@@ -83,8 +84,23 @@ public class ExplosiveBowProjectile : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, angle + 90);
         }
     }
+    public void OnCollisionEnter2D(Collision2D col){
+        if(col.gameObject.tag == "Enemy"){
+            Enemy enemy = col.gameObject.GetComponent<Enemy>();
+            enemy.health -= damage;
+            enemy.CheckEnemyHealth();
+            Destroy(gameObject);
+        } else if(col.gameObject.tag == "Player"){
+            Player player = col.gameObject.GetComponent<Player>();
+            player.PlayerTakeDamage();
+            Destroy(gameObject);
+        }
+    
+        
+    }
     IEnumerator Deceleratenow(){
         yield return new WaitForSeconds(0.5f);
         decelerating = true;
     }
+
 }

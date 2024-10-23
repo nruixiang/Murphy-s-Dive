@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public static float ultCharge = 0;
     float ultReq = 5;
     public static bool ultReady;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,4 +41,5 @@ public class UIManager : MonoBehaviour
         }
         bar.transform.localScale = new Vector3(state, bar.localScale.y, 1f);
     }
+    
 }

@@ -34,9 +34,10 @@ public class BulletScript : BulletBase
     }
     public void OnCollisionEnter2D(Collision2D col){
         if(col.gameObject.tag == "Enemy"){
+            Destroy(gameObject);
             Enemy enemy = col.gameObject.GetComponent<Enemy>();
             enemy.health -= damage;
-            Destroy(gameObject);
+            enemy.CheckEnemyHealth();
         } else if(col.gameObject.tag == "Wall"){
             --bounceAmount;
             if(bounceAmount == 1){
@@ -50,9 +51,9 @@ public class BulletScript : BulletBase
             dir = newVelocity;
             Debug.Log("Collided");
         } else if(col.gameObject.tag == "Player"){
+            Destroy(gameObject);
             Player player = col.gameObject.GetComponent<Player>();
             player.PlayerTakeDamage();
-            Destroy(gameObject);
         }
         
     }

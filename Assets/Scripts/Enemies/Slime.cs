@@ -6,9 +6,7 @@ public class Slime : Enemy
 {
     // Start is called before the first frame update
     void Awake(){
-        state = State.Chase;
-        canEnemyAttack = true;
-        dist = Vector2.Distance(transform.position, player.transform.position); //Initialize dist at start to prevent from going into Attack State at the start
+        InitializeEnemy();
     }
     void Start()
     {

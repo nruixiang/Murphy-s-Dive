@@ -72,4 +72,9 @@ public class Enemy : MonoBehaviour
         }
         
     }
+    public void InitializeEnemy(){
+        state = State.Chase;
+        canEnemyAttack = true;
+        dist = Vector2.Distance(transform.position, player.transform.position);
+    }
 }

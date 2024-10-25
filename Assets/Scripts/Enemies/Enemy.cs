@@ -75,11 +75,13 @@ public class Enemy : MonoBehaviour
     }
     public void InitializeEnemy(){
         state = State.Spawn;
+        anim = GetComponent<Animator>();
         canEnemyAttack = false;
         dist = Vector2.Distance(transform.position, player.transform.position);
     }
     public IEnumerator SetSlimeStats(){
         yield return new WaitForSeconds(1f);
+        anim.SetBool("Spawned", true);
         attackRange = 2f;
         enemyAttackCooldown = 2f;
         health = 10;

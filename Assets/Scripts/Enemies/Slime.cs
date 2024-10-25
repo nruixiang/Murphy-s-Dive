@@ -19,7 +19,7 @@ public class Slime : Enemy
     {
         switch(state){
             case State.Spawn:
-            SetSlimeStats();
+            StartCoroutine(SetSlimeStats());
             break;
             case State.Chase:
             ChasePlayer();

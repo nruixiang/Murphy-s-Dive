@@ -11,10 +11,6 @@ public class Slime : Enemy
     void Start()
     {
         //Variables to initialize using a database (JSON/CSV)
-        attackRange = 2f;
-        enemyAttackCooldown = 2f;
-        health = 10;
-        speed = 1;
 
     }
 
@@ -22,6 +18,9 @@ public class Slime : Enemy
     void Update()
     {
         switch(state){
+            case State.Spawn:
+            SetSlimeStats();
+            break;
             case State.Chase:
             ChasePlayer();
             break;
@@ -31,7 +30,9 @@ public class Slime : Enemy
         }
         dist = Vector2.Distance(transform.position, player.transform.position); //Continuosly update it to transition back and forth between States
         FlipEnemy();
-
+        Debug.Log(state);
         
     }
+    
+    
 }

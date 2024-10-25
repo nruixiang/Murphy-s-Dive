@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public enum State{
-        Chase, Attack,
+        Spawn, Chase, Attack,
     }
     public State state;
     public int health;
@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     public float attackRange;
     public float enemyAttackCooldown;
     public bool canEnemyAttack;
+    public Animator anim;
 
     //DONT DO ANY AWAKE/START/UPDATE THINGS HERE IT WONT WORK DUMDUM
     protected void ChasePlayer(){
@@ -73,8 +74,17 @@ public class Enemy : MonoBehaviour
         
     }
     public void InitializeEnemy(){
-        state = State.Chase;
-        canEnemyAttack = true;
+        state = State.Spawn;
+        canEnemyAttack = false;
         dist = Vector2.Distance(transform.position, player.transform.position);
+    }
+    public IEnumerator SetSlimeStats(){
+        yield return new WaitForSeconds(1f);
+        attackRange = 2f;
+        enemyAttackCooldown = 2f;
+        health = 10;
+        speed = 1;
+        canEnemyAttack = true;
+        state = State.Chase;
     }
 }

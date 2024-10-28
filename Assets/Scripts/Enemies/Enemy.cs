@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     public Animator anim;
 
     //DONT DO ANY AWAKE/START/UPDATE THINGS HERE IT WONT WORK DUMDUM
+
     protected void ChasePlayer(){
         Vector2 direction = player.transform.position - transform.position;
         direction.Normalize();
@@ -32,11 +33,11 @@ public class Enemy : MonoBehaviour
     }
     protected void AttackPlayer(){
         if(canEnemyAttack == true){
+            canEnemyAttack = false;
             StartCoroutine(AttackCooldown());
             //Debug Code to remove
             Debug.Log("Attacking Player");
-            TrackPlayer();
-            Instantiate(enemyAttackHitbox, enemyAttackTransform.position, enemyAttackTransform.rotation);
+            
             
         }
         if(dist > attackRange){
@@ -53,8 +54,8 @@ public class Enemy : MonoBehaviour
         child.transform.rotation = Quaternion.Euler(0,0,rotZ);
     }
     IEnumerator AttackCooldown(){
-        canEnemyAttack = false;
-        
+        TrackPlayer();
+        Instantiate(enemyAttackHitbox, enemyAttackTransform.position, enemyAttackTransform.rotation);
         yield return new WaitForSeconds(enemyAttackCooldown);
         canEnemyAttack = true;
     }
@@ -74,6 +75,7 @@ public class Enemy : MonoBehaviour
         
     }
     public void InitializeEnemy(){
+        player = GameObject.FindGameObjectWithTag("Player");
         state = State.Spawn;
         anim = GetComponent<Animator>();
         canEnemyAttack = false;
@@ -83,6 +85,16 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(1f);
         anim.SetBool("Spawned", true);
         attackRange = 2f;
+        enemyAttackCooldown = 2f;
+        health = 10;
+        speed = 1;
+        canEnemyAttack = true;
+        state = State.Chase;
+    }
+    public IEnumerator SetBeholderStats(){
+        yield return new WaitForSeconds(1f);
+        anim.SetBool("Spawned", true);
+        attackRange = 6f;
         enemyAttackCooldown = 2f;
         health = 10;
         speed = 1;

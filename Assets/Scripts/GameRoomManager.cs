@@ -11,7 +11,7 @@ public class GameRoomManager : MonoBehaviour
     public List<Transform> roomTeleportPoints = new List<Transform>();
 
     private int currentRoomIndex = 0; // Tracks the current room index
-    private bool roomCleared = false;
+    public bool roomCleared = false;
     [SerializeField] private int targetRoomIndex; //Choose which room you want the trigger to teleport you to
 
     void Start()
@@ -104,6 +104,20 @@ public class GameRoomManager : MonoBehaviour
         {
             enemy.gameObject.SetActive(isActive);
         }
+    }
+    public List<Enemy> GetEnemiesInCurrentRoom()
+    {
+        List<Enemy> activeEnemies = new List<Enemy>();
+        Enemy[] enemies = rooms[currentRoomIndex].GetComponentsInChildren<Enemy>();
+
+        foreach (Enemy enemy in enemies)
+        {
+            if (enemy.gameObject.activeSelf) // Only add active enemies
+            {
+                activeEnemies.Add(enemy);
+            }
+        }
+        return activeEnemies;
     }
        
     

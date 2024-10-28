@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedWeapon : Weapon
+public class ExplosiveBow : Weapon
 {
     private Camera mainCam;
     private Vector3 mousePos;
     [SerializeField] GameObject projectile;
-    [SerializeField] GameObject ultProjectile;
     public Transform projectileTransform;
     public bool canFire;
     private float timer = 1;
+    [SerializeField] int ultDamage;
+    
     
     
     // Start is called before the first frame update
     void Awake(){
-        Weapon_ID = 1001;
+        Weapon_ID = 1002;
         //SetWeaponStats();
 
     }
@@ -62,9 +63,19 @@ public class RangedWeapon : Weapon
     }
     void UltShoot(){
         if(UIManager.ultReady == true){
-            Instantiate(ultProjectile, projectileTransform.position, projectileTransform.rotation);
+            GameRoomManager gameRoomManager = FindObjectOfType<GameRoomManager>();
+            List<Enemy> enemies = gameRoomManager.GetEnemiesInCurrentRoom();
+
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.health -= ultDamage;
+                enemy.CheckEnemyHealth();
+            }
+
+            // Reset or deactivate the ultimate ability
             UIManager.ultReady = false;
             UIManager.ultCharge = 0;
+        
         }
     }
 }

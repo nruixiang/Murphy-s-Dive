@@ -9,7 +9,7 @@ public class RoomTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" && gameRoomManager.roomCleared)
         {
             // Ask the GameRoomManager to teleport the player to the specific room
             gameRoomManager.TeleportPlayerToRoom(targetRoomIndex, col.gameObject);

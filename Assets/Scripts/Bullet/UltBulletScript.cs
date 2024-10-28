@@ -21,6 +21,7 @@ public class UltBulletScript : MonoBehaviour
         if(col.gameObject.tag == "Enemy"){
             Enemy enemy = col.gameObject.GetComponent<Enemy>();
             enemy.health -= damage;
+            enemy.CheckEnemyHealth();
             Debug.Log("IT HIIIIIT");
         }
     }

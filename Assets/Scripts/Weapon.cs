@@ -6,7 +6,7 @@ public class Weapon : MonoBehaviour
 {
     public CSVReader csvReader;
     public int Weapon_ID;
-    public float damage;
+    public int damage;
     public bool ultReady;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour
     // }
     public void SetWeaponStats(){
         WeaponStats weaponStats = csvReader.GetWeaponById(Weapon_ID);
-        damage = weaponStats.damage;
+        //damage = weaponStats.damage;
 
     }
 }

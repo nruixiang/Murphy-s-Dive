@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -32,13 +33,12 @@ public class Enemy : MonoBehaviour
         }
     }
     protected void AttackPlayer(){
-        if(canEnemyAttack == true){
-            canEnemyAttack = false;
+        if(canEnemyAttack){
             StartCoroutine(AttackCooldown());
-            //Debug Code to remove
             Debug.Log("Attacking Player");
-            
-            
+            TrackPlayer();
+            Instantiate(enemyAttackHitbox, enemyAttackTransform.position, enemyAttackTransform.rotation);
+            canEnemyAttack = false;
         }
         if(dist > attackRange){
             state = State.Chase;
@@ -54,17 +54,9 @@ public class Enemy : MonoBehaviour
         child.transform.rotation = Quaternion.Euler(0,0,rotZ);
     }
     IEnumerator AttackCooldown(){
-        TrackPlayer();
-        Instantiate(enemyAttackHitbox, enemyAttackTransform.position, enemyAttackTransform.rotation);
+        Debug.Log("CD CALLED");
         yield return new WaitForSeconds(enemyAttackCooldown);
         canEnemyAttack = true;
-    }
-    protected void FlipEnemy(){
-        if(player.transform.position.x > this.transform.position.x){
-            this.GetComponent<SpriteRenderer>().flipX = true;
-        } else{
-            this.GetComponent<SpriteRenderer>().flipX = false;
-        }
     }
     public void CheckEnemyHealth(){
         if(health <= 0){
@@ -92,13 +84,22 @@ public class Enemy : MonoBehaviour
         state = State.Chase;
     }
     public IEnumerator SetBeholderStats(){
-        yield return new WaitForSeconds(1f);
-        anim.SetBool("Spawned", true);
         attackRange = 6f;
         enemyAttackCooldown = 2f;
         health = 10;
         speed = 1;
-        canEnemyAttack = true;
+        yield return new WaitForSeconds(1f);
+        anim.SetBool("Spawned", true);
+        
         state = State.Chase;
+        yield return new WaitForSeconds(0.5f);
+        canEnemyAttack = true;
+    }
+        protected void FlipEnemy(){
+        if(player.transform.position.x > this.transform.position.x){
+            this.GetComponent<SpriteRenderer>().flipX = true;
+        } else{
+            this.GetComponent<SpriteRenderer>().flipX = false;
+        }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Slime : Enemy
 {
+    private bool isInitialized = false;
     // Start is called before the first frame update
     void Awake(){
         InitializeEnemy();
@@ -19,7 +20,10 @@ public class Slime : Enemy
     {
         switch(state){
             case State.Spawn:
-            StartCoroutine(SetSlimeStats());
+            if(!isInitialized){
+                StartCoroutine(SetSlimeStats());
+                isInitialized = true;
+            }
             break;
             case State.Chase:
             ChasePlayer();

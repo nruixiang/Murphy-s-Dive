@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Beholder : Enemy
 {
+    private bool isInitialized = false;
     void Awake(){
         InitializeEnemy();
     }
@@ -18,7 +19,11 @@ public class Beholder : Enemy
     {
         switch(state){
             case State.Spawn:
-            StartCoroutine(SetBeholderStats());
+            if(!isInitialized){
+                StartCoroutine(SetBeholderStats());
+                isInitialized = true;
+            }
+            
             break;
             case State.Chase:
             ChasePlayer();

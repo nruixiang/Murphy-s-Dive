@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
     protected void AttackPlayer(){
         if(canEnemyAttack){
             StartCoroutine(AttackCooldown());
-            Debug.Log("Attacking Player");
+            //Debug.Log("Attacking Player");
             TrackPlayer();
             Instantiate(enemyAttackHitbox, enemyAttackTransform.position, enemyAttackTransform.rotation);
             canEnemyAttack = false;
@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
         child.transform.rotation = Quaternion.Euler(0,0,rotZ);
     }
     IEnumerator AttackCooldown(){
-        Debug.Log("CD CALLED");
+        //Debug.Log("CD CALLED");
         yield return new WaitForSeconds(enemyAttackCooldown);
         canEnemyAttack = true;
     }

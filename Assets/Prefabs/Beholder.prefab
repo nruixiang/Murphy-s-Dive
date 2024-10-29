@@ -154,6 +154,7 @@ MonoBehaviour:
   attackRange: 0
   enemyAttackCooldown: 0
   canEnemyAttack: 0
+  anim: {fileID: 0}
 --- !u!1 &2180049477549314134
 GameObject:
   m_ObjectHideFlags: 0

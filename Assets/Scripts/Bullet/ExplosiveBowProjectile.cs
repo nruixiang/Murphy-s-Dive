@@ -8,7 +8,7 @@ public class ExplosiveBowProjectile : MonoBehaviour
     private Vector3 mousePos;
     private Camera mainCam;
     private Rigidbody2D rb;
-    private float initialForce = 16f;    // Initial force when shot
+    private float initialForce = 28f;    // Initial force when shot
     private float force;                // Force used for both deceleration and returning
     private float maxForce = 28f;       // Max speed when returning to the player
     private float decelerationRate = 12f; // Speed reduction rate

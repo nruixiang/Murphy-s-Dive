@@ -24,6 +24,8 @@ public class BulletScript : BulletBase
         float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot + 90);
         dir = new Vector2(direction.x, direction.y).normalized;
+
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         
     }
 
@@ -46,7 +48,8 @@ public class BulletScript : BulletBase
                 Destroy(gameObject);
             }
             var firstContact = col.contacts[0];
-            Vector2 newVelocity = Vector2.Reflect(dir.normalized, firstContact.normal);
+            Vector2 newVelocity = Vector2.Reflect(dir.normalized, firstContact.normal).normalized;
+
             rb.velocity = newVelocity * force;
             dir = newVelocity;
             Debug.Log("Collided");

@@ -323,7 +323,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10.119852
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -815,6 +815,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1451407791
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1366058441892965820, guid: e604f7c185a8b5143963e6b8142833c7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1366058441892965820, guid: e604f7c185a8b5143963e6b8142833c7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1366058441892965820, guid: e604f7c185a8b5143963e6b8142833c7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1366058441892965820, guid: e604f7c185a8b5143963e6b8142833c7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1366058441892965820, guid: e604f7c185a8b5143963e6b8142833c7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1366058441892965820, guid: e604f7c185a8b5143963e6b8142833c7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1366058441892965820, guid: e604f7c185a8b5143963e6b8142833c7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1366058441892965820, guid: e604f7c185a8b5143963e6b8142833c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1366058441892965820, guid: e604f7c185a8b5143963e6b8142833c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1366058441892965820, guid: e604f7c185a8b5143963e6b8142833c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8075581841196657580, guid: e604f7c185a8b5143963e6b8142833c7, type: 3}
+      propertyPath: m_Name
+      value: CorruptChampion
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e604f7c185a8b5143963e6b8142833c7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -824,3 +881,4 @@ SceneRoots:
   - {fileID: 642484886}
   - {fileID: 1122780054}
   - {fileID: 1088134361}
+  - {fileID: 1451407791}

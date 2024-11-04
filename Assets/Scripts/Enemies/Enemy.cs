@@ -6,13 +6,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public enum State{
-        Spawn, Chase, Attack,
+        Spawn, Chase, Attack, Death
     }
     public State state;
     public int health;
     public int speed;
     public GameObject player;
-    [SerializeField] Transform enemyAttackTransform;
+    public Transform enemyAttackTransform;
     [SerializeField] GameObject enemyAttackHitbox;
     public float dist;
     public float attackRange;
@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     //For LOS
     public LayerMask layerMask;
     public bool InLineOfSight;
-    private bool isAttacking = false;
+    public bool isAttacking = false;
 
     //DONT DO ANY AWAKE/START/UPDATE THINGS HERE IT WONT WORK DUMDUM
 
@@ -46,19 +46,12 @@ public class Enemy : MonoBehaviour
             TrackPlayer();
             Instantiate(enemyAttackHitbox, enemyAttackTransform.position, enemyAttackTransform.rotation);
             isAttacking = true;
-            //canEnemyAttack = false;
-            //StartCoroutine(AttackCooldown());
             
         }
-
-        if(dist > attackRange){
-        state = State.Chase;
-        anim.SetBool("SlimeAttack", false);
-        isAttacking = false;
-        }
-        
+        CheckPlayerDistance();
         
     }
+
     protected void TrackPlayer(){
         Transform child = this.gameObject.transform.GetChild(0);
         Vector3 rotation = player.transform.position - transform.position;
@@ -68,36 +61,28 @@ public class Enemy : MonoBehaviour
 
         child.transform.rotation = Quaternion.Euler(0,0,rotZ);
     }
-    IEnumerator AttackCooldown(){
-        Debug.Log("Start AttCD");
-        yield return new WaitForSeconds(enemyAttackCooldown);
-        Debug.Log("End AttCD");
-        canEnemyAttack = true;
-    }
     public void CheckEnemyHealth(){
         if(health <= 0){
-            Destroy(gameObject);
+            anim.SetTrigger("SlimeDeath");
             GameRoomManager gameRoomManager = FindObjectOfType<GameRoomManager>();
             gameRoomManager.EnemyDefeated();
         }
         
     }
+
     public void InitializeEnemy(){
         player = GameObject.FindGameObjectWithTag("Player");
         layerMask = ~LayerMask.GetMask("Camera", "Enemy", "Bullet");
         state = State.Spawn;
         anim = GetComponent<Animator>();
-        //canEnemyAttack = false;
         dist = Vector2.Distance(transform.position, player.transform.position);
     }
     public IEnumerator SetSlimeStats(){
         yield return new WaitForSeconds(1f);
         anim.SetBool("Spawned", true);
         attackRange = 2f;
-        enemyAttackCooldown = 2f;
         health = 10;
         speed = 1;
-        //canEnemyAttack = true;
         state = State.Chase;
     }
     public IEnumerator SetBeholderStats(){
@@ -110,7 +95,17 @@ public class Enemy : MonoBehaviour
         
         state = State.Chase;
         yield return new WaitForSeconds(0.5f);
-        //canEnemyAttack = true;
+    }
+    public IEnumerator SetChampionStats(){
+        attackRange = 3f;
+        enemyAttackCooldown = 2f;
+        health = 10;
+        speed = 4;
+        yield return new WaitForSeconds(1f);
+        anim.SetBool("Spawned", true);
+        
+        state = State.Chase;
+        yield return new WaitForSeconds(0.5f);
     }
     protected void FlipEnemy(){
         if(player.transform.position.x > this.transform.position.x){
@@ -129,14 +124,13 @@ public class Enemy : MonoBehaviour
             if (hit.collider.gameObject.tag == "Player")
             {
                 InLineOfSight = true;
-                // Additional behavior, e.g., setting a state or triggering an alert
             }
             else
             {
                 InLineOfSight = false;
             }
         }
-        // Optional: Draw a debug line in the editor for visualization
+        //Optional: Draw a debug line in the editor for visualization
         Debug.DrawLine(child.transform.position, player.transform.position + (player.transform.position - transform.position), Color.red);
     }
     public void ChangeStateIdle(){
@@ -151,8 +145,21 @@ public class Enemy : MonoBehaviour
     public void ChangeStateAttack(){
         state = State.Attack;
     }
+    public void ChangeStateDeath(){
+        state = State.Death;
+    }
     public void ResetAttack(){
         //canEnemyAttack = true;
         isAttacking = false;
+    }
+    public void CheckPlayerDistance(){
+        if(dist > attackRange){
+        state = State.Chase;
+        anim.SetBool("SlimeAttack", false);
+        isAttacking = false;
+        }
+    }
+    public void DestroyEnemy(){ 
+        Destroy(gameObject);
     }
 }

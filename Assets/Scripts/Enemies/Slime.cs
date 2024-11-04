@@ -33,10 +33,13 @@ public class Slime : Enemy
             case State.Attack:
             //AttackPlayer();
             break;
+            case State.Death:
+            //just die bro.
+            break;
         }
         dist = Vector2.Distance(transform.position, player.transform.position); //Continuosly update it to transition back and forth between States
         FlipEnemy();
-        //Debug.Log(state);
+        Debug.Log(state);
         LineOfSightCheck();
         
     }

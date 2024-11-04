@@ -40,7 +40,7 @@ public class ExplosiveBowProjectile : MonoBehaviour
         rb.velocity = direction * force;
 
         // Rotate the projectile to face the direction of shooting
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
         transform.rotation = Quaternion.Euler(0, 0, angle + 90);
         StartCoroutine(Deceleratenow());
     }
@@ -80,7 +80,7 @@ public class ExplosiveBowProjectile : MonoBehaviour
             rb.velocity = returnDirection * force;
 
             // Rotate the projectile to face the player as it moves
-            float angle = Mathf.Atan2(returnDirection.y, returnDirection.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(returnDirection.y, returnDirection.x) * Mathf.Rad2Deg +90;
             transform.rotation = Quaternion.Euler(0, 0, angle + 90);
         }
     }

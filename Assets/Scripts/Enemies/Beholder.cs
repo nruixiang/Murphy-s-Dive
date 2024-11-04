@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Beholder : Enemy
 {
-    private bool isInitialized = false;
     void Awake(){
         InitializeEnemy();
     }

@@ -7,12 +7,14 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     public float maxHealth;
+    private Animator anim;
     [SerializeField] float movementSpeed;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -21,12 +23,22 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         rb.velocity = new Vector2(horizontal * movementSpeed, vertical * movementSpeed);
-
+        
+        if(vertical == 0){
+            anim.SetBool("Moving", false);
+        } else{
+            anim.SetBool("Moving", true);
+        }
         if(horizontal >= 1){
             sr.flipX = true;
+
+            anim.SetBool("Moving", true);
+
         } else if(horizontal < 0){
             sr.flipX = false;
-        } 
+
+            anim.SetBool("Moving", true);
+        }
     }
     public void PlayerTakeDamage(){
         HealthManager.health--;

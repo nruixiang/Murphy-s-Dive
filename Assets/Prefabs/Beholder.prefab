@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 426838932143788081}
   - component: {fileID: 6693746024409773361}
   - component: {fileID: 1494097529715146566}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Beholder
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -155,6 +155,9 @@ MonoBehaviour:
   enemyAttackCooldown: 0
   canEnemyAttack: 0
   anim: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &2180049477549314134
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3618157536058422713}
   - component: {fileID: 6973364977893784110}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Enemy Attack Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +251,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4224594191151201496}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Enemy Attack Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

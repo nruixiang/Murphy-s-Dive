@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Slime : Enemy
 {
-    private bool isInitialized = false;
+    
     // Start is called before the first frame update
     void Awake(){
         InitializeEnemy();
     }
     void Start()
     {
+        
+        
         //Variables to initialize using a database (JSON/CSV)
 
     }
@@ -29,12 +31,13 @@ public class Slime : Enemy
             ChasePlayer();
             break;
             case State.Attack:
-            AttackPlayer();
+            //AttackPlayer();
             break;
         }
         dist = Vector2.Distance(transform.position, player.transform.position); //Continuosly update it to transition back and forth between States
         FlipEnemy();
         //Debug.Log(state);
+        LineOfSightCheck();
         
     }
     

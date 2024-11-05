@@ -44,6 +44,7 @@ public class BossEnemy : Enemy
         FlipEnemy();
         Debug.Log(state);
         Debug.Log(currentAttackType);
+        Debug.Log(attackRange);
         LineOfSightCheck();
 
         if(attackSwitchTimer > 0){
@@ -56,10 +57,10 @@ public class BossEnemy : Enemy
     private void CycleAttacks(){
         if(currentAttackType == AttackType.Melee){
             currentAttackType = AttackType.Ranged;
-            attackRange = 6f;
+            attackRange = 20f;
         } else if(currentAttackType == AttackType.Ranged){
             currentAttackType = AttackType.Melee;
-            attackRange = 3f;
+            attackRange = 10f;
         }
     }
     //To use in animator to attack player

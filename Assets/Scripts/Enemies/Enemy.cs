@@ -80,7 +80,8 @@ public class Enemy : MonoBehaviour
     public IEnumerator SetSlimeStats(){
         yield return new WaitForSeconds(1f);
         anim.SetBool("Spawned", true);
-        attackRange = 2f;
+        //attackRange = 2f; is slime stats
+        attackRange = 6f;
         health = 10;
         speed = 1;
         state = State.Chase;

@@ -10,8 +10,8 @@ public class EnemyBullet : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();         
-        Vector2 direction = transform.up;
-        rb.velocity = direction * speed;
+        Vector2 direction = transform.right;
+        rb.velocity = direction.normalized * speed;
     }
 
     // Update is called once per frame

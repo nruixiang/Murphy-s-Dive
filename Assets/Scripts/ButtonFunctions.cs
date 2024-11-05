@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ButtonFunctions : MonoBehaviour
 {
+    private UIManager uiManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +23,24 @@ public class ButtonFunctions : MonoBehaviour
     }
     public void CloseGame(){
         Application.Quit();
+    }
+    public void ResumeGame(){
+        uiManager = FindObjectOfType<UIManager>();
+        if (uiManager.isPauseMenuLoaded && uiManager.IsSceneLoaded("PauseMenu")) // Only unload if the pause menu is loaded
+        {
+            Time.timeScale = 1;
+            uiManager.paused = false;
+            uiManager.isPauseMenuLoaded = false;
+            SceneManager.UnloadSceneAsync("PauseMenu");
+            Cursor.SetCursor(uiManager.crosshair, Vector2.zero, CursorMode.Auto);
+        }
+    }
+    public void RestartGame(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
+    }
+    public void LoadMainMenu(){
+        SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1;
     }
 }

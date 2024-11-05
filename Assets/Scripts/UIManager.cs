@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    public Texture2D crosshair;
+    [SerializeField] Texture2D cursor;
     [SerializeField] Transform bar;
     public static float ultCharge = 0;
     float ultReq = 5;
     public static bool ultReady;
-    private bool paused;
-    private bool isPauseMenuLoaded;
+    public bool paused;
+    public bool isPauseMenuLoaded;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,7 @@ public class UIManager : MonoBehaviour
         ultReady = false;
         paused = false;
         isPauseMenuLoaded = false;
+        Cursor.SetCursor(crosshair, Vector2.zero, CursorMode.Auto);
     }
 
     // Update is called once per frame
@@ -57,7 +60,7 @@ public class UIManager : MonoBehaviour
         }
         bar.transform.localScale = new Vector3(state, bar.localScale.y, 1f);
     }
-    private void PauseGame()
+    public void PauseGame()
     {
         if (!isPauseMenuLoaded) // Only load if the pause menu is not already loaded
         {
@@ -65,6 +68,7 @@ public class UIManager : MonoBehaviour
             paused = true;
             isPauseMenuLoaded = true;
             SceneManager.LoadSceneAsync("PauseMenu", LoadSceneMode.Additive);
+            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
         }
     }
 
@@ -76,11 +80,12 @@ public class UIManager : MonoBehaviour
             paused = false;
             isPauseMenuLoaded = false;
             SceneManager.UnloadSceneAsync("PauseMenu");
+            Cursor.SetCursor(crosshair, Vector2.zero, CursorMode.Auto);
         }
     }
 
     // Check if a scene is currently loaded
-    private bool IsSceneLoaded(string sceneName)
+    public bool IsSceneLoaded(string sceneName)
     {
         for (int i = 0; i < SceneManager.sceneCount; i++)
         {

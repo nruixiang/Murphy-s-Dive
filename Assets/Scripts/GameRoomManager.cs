@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameRoomManager : MonoBehaviour
 {
-    [SerializeField] Texture2D crosshair;
+
     private HealthManager healthManager;
     public List<GameObject> rooms = new List<GameObject>(); // List of rooms (tilemaps/room objects)
     public List<GameObject> roomWalls = new List<GameObject>(); // List of colliders that act as walls/doors for each room
@@ -19,7 +19,7 @@ public class GameRoomManager : MonoBehaviour
     void Start()
     {
         healthManager = FindObjectOfType<HealthManager>();
-        Cursor.SetCursor(crosshair, Vector2.zero, CursorMode.Auto);
+
         InitializeRoom(currentRoomIndex); // Start with the first room
 
         for (int i = 1; i < rooms.Count; i++)

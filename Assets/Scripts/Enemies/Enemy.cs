@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -44,8 +45,13 @@ public class Enemy : MonoBehaviour
     protected void AttackPlayer(){
         if(!isAttacking){
             TrackPlayer();
-            Instantiate(enemyAttackHitbox, enemyAttackTransform.position, enemyAttackTransform.rotation);
+            GameObject attackHitBox = Instantiate(enemyAttackHitbox, enemyAttackTransform.position, enemyAttackTransform.rotation);
             isAttacking = true;
+
+            //This if check is specifically so that the sprite of the melee swing is not upside down. Should not impact the Slime since there is no attack sprite for it, only animation.
+            if(player.transform.position.x < this.transform.position.x){
+                attackHitBox.transform.localScale = new Vector3(attackHitBox.transform.localScale.x, -attackHitBox.transform.localScale.y, attackHitBox.transform.localScale.z);
+            }
             
         }
         CheckPlayerDistance();
@@ -60,6 +66,7 @@ public class Enemy : MonoBehaviour
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
         child.transform.rotation = Quaternion.Euler(0,0,rotZ);
+
     }
     public void CheckEnemyHealth(){
         if(health <= 0){

@@ -12,7 +12,6 @@ public class LightningRod : Weapon
     public bool canFire;
     private float timer = 1;
     
-    
     // Start is called before the first frame update
     void Awake(){
         Weapon_ID = 1001;

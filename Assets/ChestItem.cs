@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ChestItem : MonoBehaviour
 {
+    private GameObject lightningBoltIMG;
+    private GameObject explosiveBowIMG;
     public LightningRod lightningBolt;
     public ExplosiveBow explosiveBow;
     public float jumpHeight = 2f;       // Height of the jump
@@ -36,10 +38,6 @@ public class ChestItem : MonoBehaviour
         float yPosition = Mathf.Lerp(startPosition.y, targetPosition.y, Mathf.Sin(normalizedTime * Mathf.PI));
         transform.position = new Vector3(startPosition.x, yPosition, startPosition.z);
 
-        // if (normalizedTime >= 1f)
-        // {
-        //     Destroy(this);
-        // }
         if (playerInTrigger && Input.GetKeyDown(KeyCode.E))
         {
             ItemPickedUp();
@@ -49,8 +47,6 @@ public class ChestItem : MonoBehaviour
     public void ItemPickedUp(){
         lightningBolt.enabled = false;
         explosiveBow.enabled = true;
-
-        
     }
     void OnTriggerEnter2D(Collider2D col)
     {

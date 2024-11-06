@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossEnemy : Enemy
 {
@@ -19,7 +20,7 @@ public class BossEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        bossHealthBar.SetActive(true);
+        TurnOnHUD();
 
         attackSwitchCooldown = 5f;
         attackSwitchTimer = attackSwitchCooldown;
@@ -102,4 +103,12 @@ public class BossEnemy : Enemy
         
         
     }
+    private void TurnOnHUD(){
+        Debug.Log("HUD ON");
+        bossHealthBar.SetActive(true);
+    }
+    public void GoToWinScreen(){
+        SceneManager.LoadScene("WinScene");
+    }
+    
 }

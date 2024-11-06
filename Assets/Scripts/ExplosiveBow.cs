@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ExplosiveBow : Weapon
 {
+    [SerializeField] GameObject img1;
+    [SerializeField] GameObject img2;
     private Camera mainCam;
     private Vector3 mousePos;
     [SerializeField] GameObject projectile;
@@ -11,15 +13,14 @@ public class ExplosiveBow : Weapon
     public bool canFire;
     private float timer = 1;
     [SerializeField] int ultDamage;
+    [SerializeField] Animator anim;
     
-    
+    private void OnEnable(){
+        img1.SetActive(false);
+        img2.SetActive(true);
+    }
     
     // Start is called before the first frame update
-    void Awake(){
-        Weapon_ID = 1002;
-        //SetWeaponStats();
-
-    }
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -63,7 +64,18 @@ public class ExplosiveBow : Weapon
     }
     void UltShoot(){
         if(UIManager.ultReady == true){
-            GameRoomManager gameRoomManager = FindObjectOfType<GameRoomManager>();
+            anim.SetTrigger("UltFired");
+            UIManager.ultReady = false;
+            UIManager.ultCharge = 0;
+            StartCoroutine(UltDamage());
+            
+        
+        }
+    }
+    private IEnumerator UltDamage(){
+        yield return new WaitForSeconds(1.7f);
+        Debug.Log("Ult Damage Hit");
+        GameRoomManager gameRoomManager = FindObjectOfType<GameRoomManager>();
             List<Enemy> enemies = gameRoomManager.GetEnemiesInCurrentRoom();
 
             foreach (Enemy enemy in enemies)
@@ -73,9 +85,5 @@ public class ExplosiveBow : Weapon
             }
 
             // Reset or deactivate the ultimate ability
-            UIManager.ultReady = false;
-            UIManager.ultCharge = 0;
-        
-        }
     }
 }

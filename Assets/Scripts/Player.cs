@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     }
     public IEnumerator DamageFeedback(){
         this.GetComponent<SpriteRenderer>().color = Color.red;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         this.GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

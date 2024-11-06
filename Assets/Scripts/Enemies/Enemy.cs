@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
         if(InLineOfSight){
             if(dist < attackRange && !isAttacking){
             state = State.Attack;
-            anim.SetBool("SlimeAttack", true);
+            anim.SetBool("EnemyAttack", true);
             }
         }
         
@@ -70,7 +70,7 @@ public class Enemy : MonoBehaviour
     }
     public void CheckEnemyHealth(){
         if(health <= 0){
-            anim.SetTrigger("SlimeDeath");
+            anim.SetTrigger("EnemyDeath");
             GameRoomManager gameRoomManager = FindObjectOfType<GameRoomManager>();
             gameRoomManager.EnemyDefeated();
         }
@@ -107,7 +107,7 @@ public class Enemy : MonoBehaviour
     public IEnumerator SetChampionStats(){
         attackRange = 3f;
         enemyAttackCooldown = 2f;
-        health = 10;
+        //health = 10; due to needing to set the health when initializing so the healthbar works
         speed = 4;
         yield return new WaitForSeconds(1f);
         anim.SetBool("Spawned", true);
@@ -163,7 +163,7 @@ public class Enemy : MonoBehaviour
     public void CheckPlayerDistance(){
         if(dist > attackRange){
         state = State.Chase;
-        anim.SetBool("SlimeAttack", false);
+        anim.SetBool("EnemyAttack", false);
         isAttacking = false;
         }
     }

@@ -11,13 +11,22 @@ public class BossEnemy : Enemy
     [SerializeField] float attackSwitchCooldown;
     [SerializeField] GameObject bossRangedAttack;
     private float attackSwitchTimer;
+    //For Boss Health Bar
+    [SerializeField] GameObject bossHealthBar;
+    [SerializeField] Transform bar;
+    private float championMaxHealthVar;
+
     // Start is called before the first frame update
     void Start()
     {
+        bossHealthBar.SetActive(true);
+
         attackSwitchCooldown = 5f;
         attackSwitchTimer = attackSwitchCooldown;
         InitializeEnemy();
+        health = 100;
         currentAttackType = AttackType.Melee;
+        championMaxHealthVar = health;
     }
 
     // Update is called once per frame
@@ -42,10 +51,11 @@ public class BossEnemy : Enemy
         }
         dist = Vector2.Distance(transform.position, player.transform.position); //Continuosly update it to transition back and forth between States
         FlipEnemy();
-        Debug.Log(state);
-        Debug.Log(currentAttackType);
-        Debug.Log(attackRange);
+        // Debug.Log(state);
+        // Debug.Log(currentAttackType);
+        // Debug.Log(attackRange);
         LineOfSightCheck();
+        SetChampionHealthState(health, championMaxHealthVar);
 
         if(attackSwitchTimer > 0){
             attackSwitchTimer -= Time.deltaTime;
@@ -81,5 +91,15 @@ public class BossEnemy : Enemy
         CheckPlayerDistance();
         
     }
-    
+    public void SetChampionHealthState(float championCurrentHealth, float championMaxHealth){
+        Debug.Log("Champion Current Health: " + championCurrentHealth);
+        float state = (float)championCurrentHealth;
+        state /= championMaxHealth;
+        if(state < 0){
+            state = 0f;
+        }
+        bar.transform.localScale = new Vector3(state, bar.localScale.y, 1f);
+        
+        
+    }
 }

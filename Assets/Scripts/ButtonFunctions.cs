@@ -43,4 +43,8 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
     }
+    public IEnumerator GoGameScene(){
+        yield return new WaitForSeconds(2f);
+        NextScene();
+    }
 }

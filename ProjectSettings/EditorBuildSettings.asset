@@ -9,9 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 5cad908673d8aad4c94e12dc9cdc9939
   - enabled: 1
+    path: Assets/Scenes/IntroCutScene.unity
+    guid: cee9b29f7b9eb424b9c5d9b778198956
+  - enabled: 1
     path: Assets/Scenes/TestRealm.unity
     guid: 149e15672f1f0d946ad9e25afd9d264e
   - enabled: 1
     path: Assets/Scenes/PauseMenu.unity
     guid: 5f40402975955d44e943a297d2906eb2
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: ee824233d197ee94881ee59d3835d24b
   m_configObjects: {}

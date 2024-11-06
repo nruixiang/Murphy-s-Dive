@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public static bool ultReady;
     public bool paused;
     public bool isPauseMenuLoaded;
+    public bool isGameOverLoaded;
 
     // Start is called before the first frame update
     void Start()
@@ -97,5 +98,14 @@ public class UIManager : MonoBehaviour
         }
         return false;
     }
-    
+    public void GameOver(){
+        if (!isGameOverLoaded) // Only load if the pause menu is not already loaded
+        {
+            Time.timeScale = 0;
+            paused = true;
+            isGameOverLoaded = true;
+            SceneManager.LoadSceneAsync("GameOver", LoadSceneMode.Additive);
+            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+        }
+    }
 }

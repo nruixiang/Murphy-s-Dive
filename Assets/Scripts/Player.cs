@@ -9,12 +9,14 @@ public class Player : MonoBehaviour
     public float maxHealth;
     private Animator anim;
     [SerializeField] float movementSpeed;
+    private UIManager uiManager;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     // Update is called once per frame
@@ -44,7 +46,7 @@ public class Player : MonoBehaviour
         HealthManager.health--;
         StartCoroutine(DamageFeedback());
         if(HealthManager.health == 0){
-            //Die
+            uiManager.GameOver();
         }
     }
     public IEnumerator DamageFeedback(){

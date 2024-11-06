@@ -5,16 +5,16 @@ using TMPro;
 
 public class TextFade : MonoBehaviour
 {
-    public float fadeDuration = 0.5f; // Duration for each character to fade in/out
-    public float delayBetweenChars = 0.1f; // Delay between each character's fade-in/fade-out start
-    public float fadeOutDelay = 5.0f; // Time to wait before starting the fade-out
+    public float fadeDuration = 0.5f; //Duration for each character to fade in/out
+    public float delayBetweenChars = 0.1f; //Delay between each character's fade-in/fade-out start
+    public float fadeOutDelay = 5.0f; //Time to wait before starting the fade-out
 
     private TMP_Text textMeshPro;
     
     private void Awake()
     {
         textMeshPro = GetComponent<TMP_Text>();
-        textMeshPro.ForceMeshUpdate(); // Ensures the text is up-to-date
+        textMeshPro.ForceMeshUpdate(); //Ensures the text is up-to-date
     }
 
     private void OnEnable()

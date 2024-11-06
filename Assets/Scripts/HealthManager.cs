@@ -13,7 +13,7 @@ public class HealthManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        InitializeHealth();
     }
 
     // Update is called once per frame
@@ -26,5 +26,8 @@ public class HealthManager : MonoBehaviour
         for (int i = 0; i < health; i++){
             hearts[i].sprite = fullHeart;
         }
+    }
+    public void InitializeHealth(){
+        health = 3;
     }
 }

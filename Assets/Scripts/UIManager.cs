@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,8 +8,8 @@ public class UIManager : MonoBehaviour
     public Texture2D crosshair;
     [SerializeField] Texture2D cursor;
     [SerializeField] Transform bar;
-    public static float ultCharge = 0;
-    float ultReq = 5;
+    public static float ultCharge;
+    public float ultReq;
     public static bool ultReady;
     public bool paused;
     public bool isPauseMenuLoaded;
@@ -19,10 +18,8 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ultReady = false;
-        paused = false;
-        isPauseMenuLoaded = false;
-        Cursor.SetCursor(crosshair, Vector2.zero, CursorMode.Auto);
+        InitializeUi();
+        
     }
 
     // Update is called once per frame
@@ -107,5 +104,13 @@ public class UIManager : MonoBehaviour
             SceneManager.LoadSceneAsync("GameOver", LoadSceneMode.Additive);
             Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
         }
+    }
+    private void InitializeUi(){
+        ultCharge = 0;
+        ultReq = 5;
+        ultReady = false;
+        paused = false;
+        isPauseMenuLoaded = false;
+        Cursor.SetCursor(crosshair, Vector2.zero, CursorMode.Auto);
     }
 }

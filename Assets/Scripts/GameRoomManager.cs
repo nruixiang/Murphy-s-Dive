@@ -14,11 +14,15 @@ public class GameRoomManager : MonoBehaviour
 
     private int currentRoomIndex = 0; // Tracks the current room index
     public bool roomCleared = false;
-    //[SerializeField] private int targetRoomIndex; //Choose which room you want the trigger to teleport you to
+    public bool isPlayerAlive;
+    
+    private AudioSource audioSource;
+    [SerializeField] AudioClip doorOpen;
 
     void Start()
     {
         healthManager = FindObjectOfType<HealthManager>();
+        audioSource = GetComponent<AudioSource>();
 
         InitializeRoom(currentRoomIndex); // Start with the first room
 
@@ -105,7 +109,7 @@ public class GameRoomManager : MonoBehaviour
         foreach (Collider2D collider in colliders)
         {
             collider.enabled = isEnabled;
-            Debug.Log($"{collider.gameObject.name} collider enabled: {isEnabled}");
+            //Debug.Log($"{collider.gameObject.name} collider enabled: {isEnabled}");
         }
         //Some Jank, for some reason I need to reset the whole object for the colliders to work
         parent.SetActive(false);
@@ -118,6 +122,7 @@ public class GameRoomManager : MonoBehaviour
         if (enemyAmounts[currentRoomIndex] == 0 && !roomCleared)
         {
             roomCleared = true;
+            audioSource.PlayOneShot(doorOpen);
             Debug.Log("Room Cleared! Player can now proceed to the next room.");
         }
     }
@@ -154,6 +159,5 @@ public class GameRoomManager : MonoBehaviour
         }
         return activeEnemies;
     }
-       
     
 }

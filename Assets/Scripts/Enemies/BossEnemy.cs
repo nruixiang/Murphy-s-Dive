@@ -52,9 +52,7 @@ public class BossEnemy : Enemy
         }
         dist = Vector2.Distance(transform.position, player.transform.position); //Continuosly update it to transition back and forth between States
         FlipEnemy();
-        // Debug.Log(state);
-        // Debug.Log(currentAttackType);
-        // Debug.Log(attackRange);
+
         LineOfSightCheck();
         SetChampionHealthState(health, championMaxHealthVar);
 
@@ -71,7 +69,7 @@ public class BossEnemy : Enemy
             attackRange = 20f;
         } else if(currentAttackType == AttackType.Ranged){
             currentAttackType = AttackType.Melee;
-            attackRange = 10f;
+            attackRange = 2f;
         }
     }
     //To use in animator to attack player

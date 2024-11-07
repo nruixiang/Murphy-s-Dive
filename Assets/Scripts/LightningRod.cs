@@ -11,6 +11,8 @@ public class LightningRod : Weapon
     public Transform projectileTransform;
     public bool canFire;
     private float timer = 1;
+    private AudioSource audioSource;
+    [SerializeField] AudioClip rodShoot;
     
     // Start is called before the first frame update
     void Awake(){
@@ -21,6 +23,7 @@ public class LightningRod : Weapon
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        audioSource = GetComponent<AudioSource>();
         
     }
 
@@ -57,6 +60,7 @@ public class LightningRod : Weapon
         if(canFire == true){
             Instantiate(projectile, projectileTransform.position, Quaternion.identity);
             canFire = false;
+            audioSource.PlayOneShot(rodShoot);
             } 
     }
     void UltShoot(){

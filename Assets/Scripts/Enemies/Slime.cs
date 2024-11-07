@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Slime : Enemy
 {
-    
+    [SerializeField] AudioClip[] slimeSteps;
+    [SerializeField] AudioClip slimeAttack;
     // Start is called before the first frame update
     void Awake(){
         InitializeEnemy();
+        audioSource = GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -44,5 +47,14 @@ public class Slime : Enemy
         
     }
     
-    
+    public void PlayRandomFootstep(){
+        if(slimeSteps.Length == 0) return;
+
+        int randomIndex = Random.Range(0, slimeSteps.Length);
+        AudioClip clip = slimeSteps[randomIndex];
+        audioSource.PlayOneShot(clip);
+    }
+    public void PlayAttackSound(){
+        audioSource.PlayOneShot(slimeAttack);
+    }
 }

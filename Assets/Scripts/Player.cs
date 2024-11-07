@@ -6,10 +6,13 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     private SpriteRenderer sr;
-    public float maxHealth;
+    //public float maxHealth;
     private Animator anim;
     [SerializeField] float movementSpeed;
     private UIManager uiManager;
+    private AudioSource audioSource;
+    [SerializeField] AudioClip[] footstepClips;
+    [SerializeField] AudioClip playerDamagedSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +20,7 @@ public class Player : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         uiManager = FindObjectOfType<UIManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -44,14 +48,25 @@ public class Player : MonoBehaviour
     }
     public void PlayerTakeDamage(){
         HealthManager.health--;
+        audioSource.PlayOneShot(playerDamagedSound);
         StartCoroutine(DamageFeedback());
         if(HealthManager.health == 0){
-            uiManager.GameOver();
+            anim.SetTrigger("PlayerDeath");
         }
     }
     public IEnumerator DamageFeedback(){
         this.GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(0.5f);
         this.GetComponent<SpriteRenderer>().color = Color.white;
+    }
+    public void PlayerIsDead(){
+        uiManager.GameOver();
+    }
+    public void PlayRandomFootstep(){
+        if(footstepClips.Length == 0) return;
+
+        int randomIndex = Random.Range(0, footstepClips.Length);
+        AudioClip clip = footstepClips[randomIndex];
+        audioSource.PlayOneShot(clip);
     }
 }

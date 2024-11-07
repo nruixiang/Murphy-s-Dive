@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class ChestItem : MonoBehaviour
 {
-    private GameObject lightningBoltIMG;
-    private GameObject explosiveBowIMG;
     public LightningRod lightningBolt;
     public ExplosiveBow explosiveBow;
     public float jumpHeight = 2f;       // Height of the jump
@@ -16,6 +14,7 @@ public class ChestItem : MonoBehaviour
     private Vector3 targetPosition;
     private float elapsedTime;
     private bool playerInTrigger;
+    private SpriteRenderer sr;
 
     void Awake()
     {
@@ -27,6 +26,7 @@ public class ChestItem : MonoBehaviour
         playerInTrigger = false;
         lightningBolt = FindObjectOfType<LightningRod>();
         explosiveBow = FindObjectOfType<ExplosiveBow>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -47,12 +47,14 @@ public class ChestItem : MonoBehaviour
     public void ItemPickedUp(){
         lightningBolt.enabled = false;
         explosiveBow.enabled = true;
+        Destroy(gameObject);
     }
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
         {
             playerInTrigger = true;
+            sr.color = Color.green;
             Debug.Log("Player entered chest trigger");
         }
     }
@@ -62,6 +64,7 @@ public class ChestItem : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             playerInTrigger = false;
+            sr.color = Color.white;
             Debug.Log("Player exited chest trigger");
         }
     }

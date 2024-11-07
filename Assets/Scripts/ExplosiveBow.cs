@@ -14,16 +14,25 @@ public class ExplosiveBow : Weapon
     private float timer = 1;
     [SerializeField] int ultDamage;
     [SerializeField] Animator anim;
+    [SerializeField] Animator playerAnim;
+    private AudioSource audioSource;
+    [SerializeField] AudioClip bowShoot;
+    [SerializeField] AudioClip interacted;
     
     private void OnEnable(){
         img1.SetActive(false);
         img2.SetActive(true);
+
+        playerAnim.SetTrigger("BowPicked");
     }
     
     // Start is called before the first frame update
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(interacted);
+
         
     }
 
@@ -60,6 +69,7 @@ public class ExplosiveBow : Weapon
         if(canFire == true){
             Instantiate(projectile, projectileTransform.position, Quaternion.identity);
             canFire = false;
+            audioSource.PlayOneShot(bowShoot);
             } 
     }
     void UltShoot(){
@@ -73,7 +83,7 @@ public class ExplosiveBow : Weapon
         }
     }
     private IEnumerator UltDamage(){
-        yield return new WaitForSeconds(1.7f);
+        yield return new WaitForSeconds(2f);
         Debug.Log("Ult Damage Hit");
         GameRoomManager gameRoomManager = FindObjectOfType<GameRoomManager>();
             List<Enemy> enemies = gameRoomManager.GetEnemiesInCurrentRoom();

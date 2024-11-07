@@ -25,6 +25,10 @@ public class Enemy : MonoBehaviour
     public LayerMask layerMask;
     public bool InLineOfSight;
     public bool isAttacking = false;
+    public SpriteRenderer sr;
+    public Color originalColor;
+    public AudioSource audioSource;
+    [SerializeField] AudioClip enemyDamagedSound;
 
     //DONT DO ANY AWAKE/START/UPDATE THINGS HERE IT WONT WORK DUMDUM
 
@@ -73,6 +77,8 @@ public class Enemy : MonoBehaviour
             anim.SetTrigger("EnemyDeath");
             GameRoomManager gameRoomManager = FindObjectOfType<GameRoomManager>();
             gameRoomManager.EnemyDefeated();
+        } else{
+            StartCoroutine(EnemyDamageFeedback());
         }
         
     }
@@ -82,33 +88,29 @@ public class Enemy : MonoBehaviour
         layerMask = ~LayerMask.GetMask("Camera", "Enemy", "Bullet");
         state = State.Spawn;
         anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+        originalColor = sr.color;
         dist = Vector2.Distance(transform.position, player.transform.position);
     }
     public IEnumerator SetSlimeStats(){
         yield return new WaitForSeconds(1f);
         anim.SetBool("Spawned", true);
-        //attackRange = 2f; is slime stats
-        attackRange = 6f;
+        attackRange = 2f;
         health = 10;
-        speed = 1;
+        speed = 2;
         state = State.Chase;
     }
     public IEnumerator SetBeholderStats(){
-        attackRange = 6f;
-        enemyAttackCooldown = 2f;
-        health = 10;
-        speed = 1;
         yield return new WaitForSeconds(1f);
         anim.SetBool("Spawned", true);
-        
+        attackRange = 6f;
+        health = 10;
+        speed = 1;
         state = State.Chase;
-        yield return new WaitForSeconds(0.5f);
     }
     public IEnumerator SetChampionStats(){
-        attackRange = 3f;
-        enemyAttackCooldown = 2f;
-        //health = 10; due to needing to set the health when initializing so the healthbar works
-        speed = 4;
+        attackRange = 2f;
+        speed = 3;
         yield return new WaitForSeconds(1f);
         anim.SetBool("Spawned", true);
         
@@ -169,5 +171,11 @@ public class Enemy : MonoBehaviour
     }
     public void DestroyEnemy(){ 
         Destroy(gameObject);
+    }
+    public IEnumerator EnemyDamageFeedback(){
+        audioSource.PlayOneShot(enemyDamagedSound);
+        sr.color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        sr.color = originalColor;
     }
 }

@@ -12,12 +12,15 @@ public class BulletScript : BulletBase
     public float force;
     [SerializeField] int damage;
     [SerializeField] int bounceAmount = 4;
+    private AudioSource audioSource;
+    [SerializeField] AudioClip[] boltClips;
     // Start is called before the first frame update
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        rb = GetComponent<Rigidbody2D>();                                                                                                       
+        rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();                                                                                                       
         Vector3 direction =  mousePos - transform.position;
         Vector3 rotation = transform.position - mousePos;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
@@ -41,11 +44,14 @@ public class BulletScript : BulletBase
             enemy.health -= damage;
             enemy.CheckEnemyHealth();
         } else if(col.gameObject.tag == "Wall"){
+            PlayRandomRichochet();
             --bounceAmount;
             if(bounceAmount == 1){
                 this.GetComponent<SpriteRenderer>().color = Color.red;
             } else if(bounceAmount == 0){
-                Destroy(gameObject);
+                GetComponent<Renderer>().enabled = false;
+                GetComponent<Collider2D>().enabled = false;
+                Destroy(gameObject, 0.1f);
             }
             var firstContact = col.contacts[0];
             Vector2 newVelocity = Vector2.Reflect(dir.normalized, firstContact.normal).normalized;
@@ -59,6 +65,13 @@ public class BulletScript : BulletBase
             player.PlayerTakeDamage();
         }
         
+    }
+    public void PlayRandomRichochet(){
+        if(boltClips.Length == 0) return;
+
+        int randomIndex = Random.Range(0, boltClips.Length);
+        AudioClip clip = boltClips[randomIndex];
+        audioSource.PlayOneShot(clip);
     }
 
 }

@@ -20,6 +20,16 @@ public class RoomTrigger : MonoBehaviour
     {
         if (col.gameObject.tag == "Player" && gameRoomManager.roomCleared)
         {
+            int bulletLayer = LayerMask.NameToLayer("Bullet");
+            GameObject[] bullets = FindObjectsOfType<GameObject>(); // Find all active GameObjects
+            
+            foreach (GameObject bullet in bullets)
+            {
+                if (bullet.layer == bulletLayer)
+                {
+                    Destroy(bullet);
+                }
+            }
             // Ask the GameRoomManager to teleport the player to the specific room
             gameRoomManager.TeleportPlayerToRoom(targetRoomIndex, col.gameObject, entranceName);
         }

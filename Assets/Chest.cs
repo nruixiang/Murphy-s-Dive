@@ -9,11 +9,13 @@ public class Chest : MonoBehaviour
     [SerializeField] GameObject chestItem;
     private bool chestOpened;
     private bool playerInTrigger;
+    private SpriteRenderer sr;
 
     void Start()
     {
         chestOpened = false;
         playerInTrigger = false;
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -30,6 +32,7 @@ public class Chest : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             playerInTrigger = true;
+            sr.color = Color.green;
             Debug.Log("Player entered chest trigger");
         }
     }
@@ -39,6 +42,7 @@ public class Chest : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             playerInTrigger = false;
+            sr.color = Color.white;
             Debug.Log("Player exited chest trigger");
         }
     }
@@ -48,5 +52,6 @@ public class Chest : MonoBehaviour
         Debug.Log("Open Chest");
         Instantiate(chestItem, transform.position, Quaternion.identity);
         chestOpened = true;
+        Destroy(gameObject);
     }
 }

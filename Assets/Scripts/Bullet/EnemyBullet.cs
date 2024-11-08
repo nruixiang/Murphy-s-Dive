@@ -21,7 +21,7 @@ public class EnemyBullet : MonoBehaviour
     }
 
     public void OnCollisionEnter2D(Collision2D col){
-        if(col.gameObject.tag == "Wall"){
+        if(col.gameObject.tag == "Wall" || col.gameObject.tag == "Enemy"){
             Destroy(gameObject);
 
         } else if(col.gameObject.tag == "Player"){

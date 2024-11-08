@@ -42,6 +42,7 @@ public class ButtonFunctions : MonoBehaviour
     public void LoadMainMenu(){
         SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
+        Cursor.SetCursor(uiManager.cursor, Vector2.zero, CursorMode.Auto);
     }
     public IEnumerator GoGameScene(){
         yield return new WaitForSeconds(2f);

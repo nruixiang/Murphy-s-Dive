@@ -138,6 +138,7 @@ MonoBehaviour:
   ultProjectile: {fileID: 2642247704206229524, guid: 85a3d76a8c6a75a44ba2c0a8d53ee2aa, type: 3}
   projectileTransform: {fileID: 4426966287885888327}
   canFire: 0
+  rodShoot: {fileID: 0}
 --- !u!114 &1350989203798253963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,10 +155,16 @@ MonoBehaviour:
   Weapon_ID: 0
   damage: 5
   ultReady: 0
+  img1: {fileID: 0}
+  img2: {fileID: 0}
   projectile: {fileID: 6930817015111778391, guid: 274e66e31a9bc494ea8cda98d5b4aa50, type: 3}
   projectileTransform: {fileID: 4426966287885888327}
   canFire: 0
   ultDamage: 16
+  anim: {fileID: 0}
+  playerAnim: {fileID: 0}
+  bowShoot: {fileID: 0}
+  interacted: {fileID: 0}
 --- !u!1 &9110148716367628651
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +243,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 505578e3230c308499cc36c62a6a8e3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -287,8 +294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3af9845c946e534a892141d2a958456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
   movementSpeed: 5
+  footstepClips: []
+  playerDamagedSound: {fileID: 0}
 --- !u!114 &8505003908970762369
 MonoBehaviour:
   m_ObjectHideFlags: 0

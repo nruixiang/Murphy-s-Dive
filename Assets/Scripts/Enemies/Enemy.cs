@@ -96,7 +96,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(1f);
         anim.SetBool("Spawned", true);
         attackRange = 2f;
-        health = 10;
+        health = 15;
         speed = 2;
         state = State.Chase;
     }
@@ -104,7 +104,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(1f);
         anim.SetBool("Spawned", true);
         attackRange = 6f;
-        health = 10;
+        health = 12;
         speed = 1;
         state = State.Chase;
     }
@@ -173,7 +173,11 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
     public IEnumerator EnemyDamageFeedback(){
+        if (enemyDamagedSound != null){
         audioSource.PlayOneShot(enemyDamagedSound);
+    } else {
+        Debug.LogWarning("enemyDamagedSound is not assigned for this enemy!");
+    }
         sr.color = Color.red;
         yield return new WaitForSeconds(0.5f);
         sr.color = originalColor;

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public Texture2D crosshair;
-    [SerializeField] Texture2D cursor;
+    public Texture2D cursor;
     [SerializeField] Transform bar;
     public static float ultCharge;
     public float ultReq;
@@ -33,11 +33,7 @@ public class UIManager : MonoBehaviour
         if(ultCharge >= ultReq){
             ultReady = true;
         }
-
-        if(Input.GetKeyDown(KeyCode.R)){
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            HealthManager.health = 3;
-        }
+        
         if (Input.GetKeyDown(KeyCode.Escape)) // Only triggers when the Escape key is pressed down
         {
             if (!paused)
@@ -107,7 +103,7 @@ public class UIManager : MonoBehaviour
     }
     private void InitializeUi(){
         ultCharge = 0;
-        ultReq = 5;
+        ultReq = 30;
         ultReady = false;
         paused = false;
         isPauseMenuLoaded = false;

@@ -5,9 +5,9 @@ using TMPro;
 
 public class TextFade : MonoBehaviour
 {
-    public float fadeDuration = 0.5f; //Duration for each character to fade in/out
-    public float delayBetweenChars = 0.1f; //Delay between each character's fade-in/fade-out start
-    public float fadeOutDelay = 5.0f; //Time to wait before starting the fade-out
+    public float fadeDuration; //Duration for each character to fade in/out
+    public float delayBetweenChars; //Delay between each character's fade-in/fade-out start
+    public float fadeOutDelay; //Time to wait before starting the fade-out
 
     private TMP_Text textMeshPro;
     
@@ -87,23 +87,39 @@ public class TextFade : MonoBehaviour
         var textInfo = textMeshPro.textInfo;
         float elapsed = 0;
 
-        // Gradually change alpha from 1 to 0 for fade-out
+        // Ensure character is within range and visible
+        if (charIndex < 0 || charIndex >= textInfo.characterCount || !textInfo.characterInfo[charIndex].isVisible)
+        {
+            yield break;
+        }
+
+        int materialIndex = textInfo.characterInfo[charIndex].materialReferenceIndex;
+        int vertexIndex = textInfo.characterInfo[charIndex].vertexIndex;
+
+        Color32[] vertexColors = textInfo.meshInfo[materialIndex].colors32;
+
+        // Loop to gradually fade out the character
         while (elapsed < fadeDuration)
         {
             float alpha = Mathf.Lerp(1, 0, elapsed / fadeDuration);
 
-            Color32[] vertexColors = textMeshPro.textInfo.meshInfo[textInfo.characterInfo[charIndex].materialReferenceIndex].colors32;
-            int vertexIndex = textInfo.characterInfo[charIndex].vertexIndex;
-
-            vertexColors[vertexIndex + 0].a = (byte)(alpha * 255);
-            vertexColors[vertexIndex + 1].a = (byte)(alpha * 255);
-            vertexColors[vertexIndex + 2].a = (byte)(alpha * 255);
-            vertexColors[vertexIndex + 3].a = (byte)(alpha * 255);
+            // Apply alpha to all vertices of the character
+            for (int i = 0; i < 4; i++)
+            {
+                vertexColors[vertexIndex + i].a = (byte)(alpha * 255);
+            }
 
             textMeshPro.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
+
+        // Ensure the character is fully transparent at the end
+        for (int i = 0; i < 4; i++)
+        {
+            vertexColors[vertexIndex + i].a = 0;
+        }
+        textMeshPro.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
     }
 }

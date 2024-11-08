@@ -25,6 +25,7 @@ public class BossEnemy : Enemy
         attackSwitchCooldown = 5f;
         attackSwitchTimer = attackSwitchCooldown;
         InitializeEnemy();
+        sr = GetComponent<SpriteRenderer>();
         health = 100;
         currentAttackType = AttackType.Melee;
         championMaxHealthVar = health;
@@ -91,7 +92,6 @@ public class BossEnemy : Enemy
         
     }
     public void SetChampionHealthState(float championCurrentHealth, float championMaxHealth){
-        Debug.Log("Champion Current Health: " + championCurrentHealth);
         float state = (float)championCurrentHealth;
         state /= championMaxHealth;
         if(state < 0){

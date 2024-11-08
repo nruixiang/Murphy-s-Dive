@@ -22,12 +22,19 @@ public class RoomTrigger : MonoBehaviour
         {
             int bulletLayer = LayerMask.NameToLayer("Bullet");
             GameObject[] bullets = FindObjectsOfType<GameObject>(); // Find all active GameObjects
+            int enemyLayer = LayerMask.NameToLayer("Enemy");
+            GameObject[] enemys = FindObjectsOfType<GameObject>();
             
             foreach (GameObject bullet in bullets)
             {
                 if (bullet.layer == bulletLayer)
                 {
                     Destroy(bullet);
+                }
+            }
+            foreach(GameObject enemy in enemys){
+                if(enemy.layer == enemyLayer){
+                    Destroy(enemy);
                 }
             }
             // Ask the GameRoomManager to teleport the player to the specific room
